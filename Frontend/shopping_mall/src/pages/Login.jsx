@@ -1,9 +1,9 @@
 import React from "react";
 import { PageContainer, LoginBox, Title, InputField, ButtonGroup, ActionButton, LoginButton } from "../styles/style";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    
+    const navigate = useNavigate();
     return (
         <PageContainer>
             <LoginBox>
@@ -19,7 +19,7 @@ const Login = () => {
                 </div>
                 <LoginButton>로그인</LoginButton>
                 <ButtonGroup>
-                    <ActionButton type="button">회원가입</ActionButton>
+                    <ActionButton type="button" onClick={()=>navigate('/register')}>회원가입</ActionButton>
                     <ActionButton type="button">ID를 잊으셨나요?</ActionButton>
                     <ActionButton type="button">PW를 잊으셨나요?</ActionButton>
                 </ButtonGroup>

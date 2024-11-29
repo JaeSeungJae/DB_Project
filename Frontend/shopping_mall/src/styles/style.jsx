@@ -104,3 +104,38 @@ export const LoginButton = styled.button`
     background-color: #b6e9bb;
   }
 `
+
+
+
+export const InputGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+`;
+
+export const Label = styled.label`
+  font-weight: bold;
+  min-width: 100px;
+  text-align: right;
+  margin-right: 10px;
+`;
+
+export const SmallInput = styled(InputField)`
+  width: 30%;
+  margin-left: 5px;
+`;
+
+export const Button = styled.button`
+  background-color: #eaeaea;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+`;
