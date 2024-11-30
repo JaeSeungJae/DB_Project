@@ -21,7 +21,7 @@ const tempProductList = [
     {
         product_name: '상품1',
         product_price: '10000',
-        product_description: '이 상품은 상품1입니다.',
+        product_description: '이 상품은 상품1입니다. 이 상품은 상품1입니다. 이 상품은 상품1입니다.',
         product_image: '상품1 이미지',
         product_category: '컴퓨터',
         product_id: 1

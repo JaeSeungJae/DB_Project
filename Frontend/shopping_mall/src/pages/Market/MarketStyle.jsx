@@ -102,6 +102,8 @@ export const ImageBox = styled.div`
 // 상품 정보
 export const ProductInfo = styled.div`
   flex: 1;
+  flex-wrap: wrap;
+  max-width: 800px;
 `;
 
 // 상품 상태 및 날짜
@@ -131,7 +133,102 @@ export const AddButton = styled.button`
     background-color: #aef2ae;
   }
 `;
+// Detail 페이지
 
-export const SearchButton = styled(CategoryButton)`
+// 상단 정보 영역
+export const Header = styled.div`
+  background-color: #eafaea;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+`;
 
+// 버튼 그룹 (수정, 삭제, 신고)
+export const HeaderButton = styled.button`
+  background-color: #dcdcdc;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover {
+    background-color: #c8c8c8;
+  }
+`;
+
+// 상품 이미지 영역
+export const ImagesContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+`;
+
+// 상품 설명 영역
+export const ProductDescription = styled.div`
+  background-color: #eafaea;
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+`;
+
+// 버튼 컨테이너
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 140px;
+`;
+
+// 큰 버튼
+export const LargeButton = styled.button`
+  background-color: #dcdcdc;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #c8c8c8;
+  }
+`;
+
+export const ActionButton = styled.button`
+  background-color: #eaeaea;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #dcdcdc;
+  }
+`;
+
+export const ProductDetailInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 800px;
+  background-color: #eafaea;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
 `
