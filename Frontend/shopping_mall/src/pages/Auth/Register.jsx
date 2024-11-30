@@ -1,5 +1,5 @@
 import React from "react";
-import { PageContainer, Title, LoginBox, InputGroup, Label, InputField, SmallInput, ButtonGroup, Button } from "../styles/style";
+import { PageContainer, Title, LoginBox, InputGroup, Label, InputField, SmallInput, ButtonGroup, Button } from "./AuthStyle";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {

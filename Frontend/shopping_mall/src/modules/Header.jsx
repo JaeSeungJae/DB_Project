@@ -1,6 +1,6 @@
 import React from "react";
-import { HeaderContainer } from "../styles/style";
-import { Button } from "../styles/style";
+import { HeaderContainer } from "../pages/Auth/AuthStyle";
+import { Button } from "../pages/Auth/AuthStyle";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {

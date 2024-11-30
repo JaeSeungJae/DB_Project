@@ -1,5 +1,5 @@
 import React from "react";
-import { PageContainer, LoginBox, Title, InputField, ButtonGroup, ActionButton, LoginButton } from "../styles/style";
+import { PageContainer, LoginBox, Title, InputField, ButtonGroup, ActionButton, LoginButton } from "./AuthStyle";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

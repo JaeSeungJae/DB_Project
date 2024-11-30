@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { PageContainer, LoginBox, ColumnFlexBox, Button } from "../styles/style";
+import { PageContainer, LoginBox, ColumnFlexBox, Button } from "./AuthStyle";
 
 const Main = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Main = () => {
             <LoginBox>
                 <ColumnFlexBox>
                 <Button style={{margin: '40px', height: '100px'}}>자유게시판</Button>
-                <Button style={{margin: '40px', height: '100px'}}>마켓</Button>
+                <Button style={{margin: '40px', height: '100px'}} onClick={()=>navigate('/market')}>마켓</Button>
                 </ColumnFlexBox>
             </LoginBox>
         </PageContainer>
