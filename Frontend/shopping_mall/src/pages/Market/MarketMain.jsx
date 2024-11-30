@@ -44,6 +44,11 @@ const tempProductList = [
 ]
 
 const MarketMain = () => {
+    const handleKeyDown = (e) => {
+        if (e.key == "Enter") {
+            handleSearch();
+        }
+    }
 
     const truncateDesc = (text, limit) => {
         if (text.length > limit) {
@@ -60,7 +65,7 @@ const MarketMain = () => {
                 <ImageBox>{product.product_image}</ImageBox>
                 <ProductInfo>
                     <div>{product.product_name}</div>
-                    <div>{product.product_price}</div>
+                    <div>{Number(product.product_price).toLocaleString('ko-KR')}원</div>
                     <div>{truncateDesc(product.product_description, 30)}</div>
                 </ProductInfo>
                 <ProductStatus>
@@ -91,7 +96,7 @@ const MarketMain = () => {
         <InputGroup>
           <Label htmlFor="search">상품 검색</Label>
           <InputField id="search" type="text" placeholder="Search for items" 
-          value={search} onChange={(e) => setSearch(e.target.value)}/>
+          value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={handleKeyDown}/>
         </InputGroup>
         <InputGroup>
           <Label htmlFor="price">금액대 설정</Label>
