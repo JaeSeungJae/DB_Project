@@ -1,8 +1,9 @@
 import React from "react";
 import { PageContainer, Title, LoginBox, InputGroup, Label, InputField, SmallInput, ButtonGroup, Button } from "../styles/style";
-
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
     return (
         <PageContainer>
             <LoginBox>
@@ -53,7 +54,7 @@ const Register = () => {
           </ButtonGroup>
 
           {/* 회원가입 버튼 */}
-          <Button type="submit" style={{ marginTop: "20px", width: "100%" }}>
+          <Button type="button" style={{ marginTop: "20px", width: "100%" }} onClick={()=>navigate('/')}>
             회원가입 완료
           </Button>
         </form>
