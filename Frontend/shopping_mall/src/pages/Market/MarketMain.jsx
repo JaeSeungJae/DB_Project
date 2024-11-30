@@ -15,6 +15,7 @@ import {
   ProductStatus,
   AddButton,
 } from "./MarketStyle";
+import { useNavigate } from "react-router-dom";
 
 const tempProductList = [
     {
@@ -44,6 +45,8 @@ const tempProductList = [
 ]
 
 const MarketMain = () => {
+    const navigate = useNavigate();
+
     const handleKeyDown = (e) => {
         if (e.key == "Enter") {
             handleSearch();
@@ -61,7 +64,8 @@ const MarketMain = () => {
         return (
         <ProductList>
         {filteredProduct.map((product) => (
-            <ProductItem key={product.product_id}>
+            <ProductItem key={product.product_id} onClick={()=>navigate(`/market/${product.product_id}`)}
+            style={{cursor: 'pointer'}}>
                 <ImageBox>{product.product_image}</ImageBox>
                 <ProductInfo>
                     <div>{product.product_name}</div>

@@ -6,6 +6,7 @@ import Login from './pages/Auth/Login';
 import Main from './pages/Auth/Main';
 import Register from './pages/Auth/Register';
 import MarketMain from './pages/Market/MarketMain';
+import MarketDetail from './pages/Market/MarketDetail';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/market" element={<MarketMain />} />
+          <Route path="/market/:id" element={<MarketDetail />} />
         </Routes>
         <Footer />
       </BrowserRouter>
