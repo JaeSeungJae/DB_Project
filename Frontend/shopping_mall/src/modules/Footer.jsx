@@ -12,7 +12,9 @@ const Footer = () => {
         }}>Home</FooterButton>
       <FooterButton>Notice</FooterButton>
       <FooterButton>Chat</FooterButton>
-      <FooterButton>MyPage</FooterButton>
+      <FooterButton onClick={()=> {
+        navigate('/mypage');
+      }}>MyPage</FooterButton>
     </FooterContainer>
   );
 };
