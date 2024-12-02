@@ -232,3 +232,9 @@ export const ProductDetailInfo = styled.div`
   margin: 20px 0;
   border-radius: 10px;
 `
+export const InputContainer = styled.div`
+margin-bottom: 10px; 
+display: flex;
+align-items: center;
+justify-content: space-around;
+`

@@ -118,7 +118,7 @@ const MarketMain = () => {
       {updateProductList()}
 
       {/* 상품 등록 버튼 */}
-      <AddButton>+</AddButton>
+      <AddButton onClick={()=>navigate('/market/post')}>+</AddButton>
     </PageContainer>
   );
 };
