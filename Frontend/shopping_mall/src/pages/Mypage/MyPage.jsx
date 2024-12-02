@@ -28,8 +28,8 @@ const MyPage = () => {
             <Header>
                 <h2>마이페이지</h2>
             </Header>
-            <MyPageBox>
-                <p>아이디 : {id}</p>
+            <MyPageBox> 
+                {/* <p>아이디 : {id}</p>
                 {modifyInfo === false ? (<p>닉네임 : {nickname}</p>)
                 : <p>닉네임 <input type="text" value={nickname} onChange={(e)=>setNickname(e.target.value)} /></p>}
                 {modifyInfo === false ? (<p>비밀번호 : ********</p>)
@@ -37,7 +37,7 @@ const MyPage = () => {
                 {modifyInfo === true && <p>비밀번호 확인 <input type="password" value={pwCheck} onChange={(e)=>setPwCheck(e.target.value)}/></p>}
                 {modifyInfo ? 
                 <SideButton onClick={()=>checkPW()}>수정 완료</SideButton>
-                :<SideButton onClick={()=>setModifyInfo(true)}>수정</SideButton>}
+                :<SideButton onClick={()=>setModifyInfo(true)}>수정</SideButton>} */}
 
                 <MyPageContainer>
                     <Button>관심 목록</Button>
@@ -46,6 +46,7 @@ const MyPage = () => {
                     <Button>구매 내역</Button>
                 </MyPageContainer>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+                    <SideButton>프로필</SideButton> 
                     <SideButton>회원탈퇴</SideButton>
                 </div>
             </MyPageBox>
