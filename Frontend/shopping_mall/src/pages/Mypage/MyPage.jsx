@@ -46,7 +46,7 @@ const MyPage = () => {
                     <Button>구매 내역</Button>
                 </MyPageContainer>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
-                    <SideButton>프로필</SideButton> 
+                    <SideButton onClick={()=>navigate('/mypage/profile')}>프로필</SideButton> 
                     <SideButton>회원탈퇴</SideButton>
                 </div>
             </MyPageBox>
