@@ -10,6 +10,7 @@ import MarketDetail from './pages/Market/MarketDetail';
 import MyPage from './pages/Mypage/MyPage';
 import Profile from './pages/Mypage/Profile';
 import PostProduct from './pages/Market/PostProduct';
+import MarketBuy from './pages/Market/MarketBuy';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/profile" element={<Profile />} />
           <Route path="/market/post" element={<PostProduct />} />
+          <Route path="/market/:id/buy" element={<MarketBuy />} />
         </Routes>
         <Footer />
       </BrowserRouter>
