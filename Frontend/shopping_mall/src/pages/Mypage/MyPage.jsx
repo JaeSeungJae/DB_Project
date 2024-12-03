@@ -41,7 +41,6 @@ const MyPage = () => {
 
                 <MyPageContainer>
                     <Button onClick={()=>navigate('/mypage/favorite')}>관심 목록</Button>
-                    <Button>내가 쓴 글</Button>
                     <Button onClick={()=>navigate('/mypage/sell')}>판매 내역</Button>
                     <Button onClick={()=>navigate('/mypage/buy')}>구매 내역</Button>
                 </MyPageContainer>
