@@ -40,10 +40,10 @@ const MyPage = () => {
                 :<SideButton onClick={()=>setModifyInfo(true)}>수정</SideButton>} */}
 
                 <MyPageContainer>
-                    <Button>관심 목록</Button>
+                    <Button onClick={()=>navigate('/mypage/favorite')}>관심 목록</Button>
                     <Button>내가 쓴 글</Button>
-                    <Button>판매 내역</Button>
-                    <Button>구매 내역</Button>
+                    <Button onClick={()=>navigate('/mypage/sell')}>판매 내역</Button>
+                    <Button onClick={()=>navigate('/mypage/buy')}>구매 내역</Button>
                 </MyPageContainer>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
                     <SideButton onClick={()=>navigate('/mypage/profile')}>프로필</SideButton> 

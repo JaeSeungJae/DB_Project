@@ -12,6 +12,10 @@ import Profile from './pages/Mypage/Profile';
 import PostProduct from './pages/Market/PostProduct';
 import MarketBuy from './pages/Market/MarketBuy';
 import Chatting from './pages/Chatting/Chatting';
+import FavoriteList from './pages/Mypage/FavoriteList';
+import SellList from './pages/Mypage/SellList';
+import BuyList from './pages/Mypage/BuyList';
+import Review from './pages/Mypage/Review';
 
 function App() {
 
@@ -30,6 +34,10 @@ function App() {
           <Route path="/market/post" element={<PostProduct />} />
           <Route path="/market/:id/buy" element={<MarketBuy />} />
           <Route path="/chatting" element={<Chatting />} />
+          <Route path="/mypage/favorite" element={<FavoriteList />} />
+          <Route path="/mypage/sell" element={<SellList />} />
+          <Route path="/mypage/buy" element={<BuyList />} />
+          <Route path="/mypage/buy/review/:id" element={<Review />} />
         </Routes>
         <Footer />
       </BrowserRouter>
