@@ -11,7 +11,9 @@ const Footer = () => {
         navigate('/');
         }}>Home</FooterButton>
       <FooterButton>Notice</FooterButton>
-      <FooterButton>Chat</FooterButton>
+      <FooterButton onClick={()=> {
+        navigate('/chatting');
+      }}>Chat</FooterButton>
       <FooterButton onClick={()=> {
         navigate('/mypage');
       }}>MyPage</FooterButton>
