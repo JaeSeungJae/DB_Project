@@ -1,13 +1,13 @@
-package database_project.database_project;
+package DB_Project_back.DB;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DatabaseProjectApplication {
+public class DbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DatabaseProjectApplication.class, args);
+		SpringApplication.run(DbApplication.class, args);
 	}
 
 }
