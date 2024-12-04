@@ -1,9 +1,13 @@
 import React from "react";
-import { PageContainer, LoginBox, Title, InputField, ButtonGroup, ActionButton, LoginButton } from "../styles/style";
+import { PageContainer, LoginBox, Title, InputField, ButtonGroup, ActionButton, LoginButton } from "./AuthStyle";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
+    const getLogin = () => {
+        localStorage.setItem('id', 1);
+        navigate('/');
+    }
     return (
         <PageContainer>
             <LoginBox>
@@ -17,7 +21,7 @@ const Login = () => {
                     <label htmlFor="pw" style={{ marginRight: "50px", minWidth: "50px", textAlign: "right" }}>PW</label>
                     <InputField id="pw" type="password" placeholder="Enter your Password" />
                 </div>
-                <LoginButton>로그인</LoginButton>
+                <LoginButton onClick={getLogin}>로그인</LoginButton>
                 <ButtonGroup>
                     <ActionButton type="button" onClick={()=>navigate('/register')}>회원가입</ActionButton>
                     <ActionButton type="button">ID를 잊으셨나요?</ActionButton>

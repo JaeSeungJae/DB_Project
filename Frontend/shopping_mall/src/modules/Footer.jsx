@@ -1,6 +1,6 @@
 import React from "react";
-import { FooterContainer } from "../styles/style";
-import { FooterButton } from "../styles/style";
+import { FooterContainer } from "../pages/Auth/AuthStyle";
+import { FooterButton } from "../pages/Auth/AuthStyle";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -12,7 +12,9 @@ const Footer = () => {
         }}>Home</FooterButton>
       <FooterButton>Notice</FooterButton>
       <FooterButton>Chat</FooterButton>
-      <FooterButton>MyPage</FooterButton>
+      <FooterButton onClick={()=> {
+        navigate('/mypage');
+      }}>MyPage</FooterButton>
     </FooterContainer>
   );
 };

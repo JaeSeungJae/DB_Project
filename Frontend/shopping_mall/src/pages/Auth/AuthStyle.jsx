@@ -15,6 +15,19 @@ export const FooterContainer = styled.footer`
   height: 100px;
 `;
 
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #c8facc;
+  padding: 10px 0;
+  height: 30px;
+`
+
 // 버튼 스타일
 export const FooterButton = styled.button`
   background-color: #c8facc; /* 버튼 배경 */
@@ -49,6 +62,9 @@ export const LoginBox = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 50%;
   text-align: center;
+  margin: 40px;
+  margin-bottom : 150px;
+  margin-top: 90px;
 `;
 
 // 제목
@@ -139,3 +155,9 @@ export const Button = styled.button`
     background-color: #dcdcdc;
   }
 `;
+
+export const ColumnFlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+`
