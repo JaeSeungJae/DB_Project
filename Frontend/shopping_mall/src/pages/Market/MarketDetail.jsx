@@ -1,11 +1,12 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PageContainer, Header, ProductInfo, ImagesContainer, ImageBox, ButtonContainer, ActionButton,
     ProductDetailInfo
  } from "./MarketStyle";
 
 const MarketDetail = () => {
     const {id} = useParams();
+    const navigate = useNavigate();
     
     return (
         <PageContainer>
@@ -13,6 +14,7 @@ const MarketDetail = () => {
           <Header>
             <h2>(product_name)</h2>
             <div>
+              <button style={{margin: '5px'}}>관심</button>
               <button style={{margin: '5px'}}>수정</button>
               <button style={{margin: '5px'}}>삭제</button>
               <button style={{margin: '5px'}}>신고</button>
@@ -40,7 +42,7 @@ const MarketDetail = () => {
     
           {/* 버튼 */}
           <ButtonContainer>
-            <ActionButton>즉시 구매</ActionButton>
+            <ActionButton onClick={()=>navigate(`/market/${id}/buy`)}>즉시 구매</ActionButton>
             <ActionButton>판매자와 채팅하기</ActionButton>
             <ActionButton>판매자 리뷰 보기</ActionButton>
           </ButtonContainer>

@@ -84,8 +84,15 @@ const Profile = () => {
                 </div>
                 </Container>
                 <Button
-                    style={{marginBottom: '200px'}}
+                    style={{width: '250px', height: '50px'}}
                     onClick={handleSubmit}>수정하기</Button>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <p style={{margin: '10px'}}>마일리지 충전</p>
+                    <input type="number" />
+                </div>
+                <Button
+                    style={{width: '250px', height: '50px',marginTop: '50px', marginBottom: '200px', }}
+                    onClick={handleSubmit}>충전하기</Button>
         </PageContainer>
     )
 }
