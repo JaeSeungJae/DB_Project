@@ -16,6 +16,13 @@ import FavoriteList from './pages/Mypage/FavoriteList';
 import SellList from './pages/Mypage/SellList';
 import BuyList from './pages/Mypage/BuyList';
 import Review from './pages/Mypage/Review';
+import BoardMain from './pages/Board/BoardMain'; 
+import Article from "./pages/Board/Article";
+import Post from "./pages/Board/Post";
+import Report from "./pages/Board/Report";
+
+
+
 
 function App() {
 
@@ -38,6 +45,10 @@ function App() {
           <Route path="/mypage/sell" element={<SellList />} />
           <Route path="/mypage/buy" element={<BuyList />} />
           <Route path="/mypage/buy/review/:id" element={<Review />} />
+          <Route path="/board" element={<BoardMain />} /> 
+          <Route path="/article/:id" element={<Article />} />
+          <Route path="/post" element={<Post />} />  
+          <Route path="/report" element={<Report />} /> 
         </Routes>
         <Footer />
       </BrowserRouter>
