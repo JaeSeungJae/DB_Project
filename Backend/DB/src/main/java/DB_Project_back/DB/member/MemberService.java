@@ -1,4 +1,5 @@
 package DB_Project_back.DB.member;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,5 +45,35 @@ public class MemberService {
         }
 
         return "failed"; // 사용자가 존재하지 않는 경우 failed
+    }
+    
+    // 사용자 제거 메서드
+    public String removeMember(String id) {
+        // 사용자 id로 조회
+        Member member = memberRepository.findById(id);
+        if (member != null) { // 회원이 존재하면 삭제
+            memberRepository.delete(member); // 조회된 엔티티를 삭제
+            return "success";
+        }
+        return "failed"; // 회원이 존재하지 않는 경우
+    }
+    
+    // 잔액 충전 메서드
+    public String chargeAccount(String id, int chargeAmount) {
+        Member member = memberRepository.findById(id);	// 회원 조회
+
+        if (member != null) { // null 여부 확인
+            member.setAmount(member.getAmount() + chargeAmount); // amount 필드 누적
+            memberRepository.save(member);
+            return "success";
+        } else {
+            return "failed"; // 해당 id의 회원이 없을 경우
+        }
+    }
+    
+    // 회원 찾기 메서드
+    public Member getProfileById(String id) {
+        // id가 존재하면 해당 회원 객체 반환
+        return memberRepository.findById(id);
     }
 }

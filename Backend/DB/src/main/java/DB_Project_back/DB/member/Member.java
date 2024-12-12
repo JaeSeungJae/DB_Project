@@ -19,6 +19,8 @@ public class Member {
     private String fname;
     private String lname;
     private String nickname;
+    private String birth_date;
+    private String email;
 
     @Transient
     private String getName(){
@@ -27,4 +29,5 @@ public class Member {
 
 
     private int level;
+    private int amount = 0;	// 잔액
 }
