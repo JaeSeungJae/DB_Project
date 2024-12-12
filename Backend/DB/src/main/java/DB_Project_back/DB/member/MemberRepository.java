@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
     Member findByIdAndPw(String id, String pw);
     boolean existsById(String id);
+    Member findById(String id);	// 사용자 id로만 조회
 }
