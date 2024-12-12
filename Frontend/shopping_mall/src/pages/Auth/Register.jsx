@@ -1,9 +1,50 @@
-import React from "react";
+import {React, useState} from "react";
 import { PageContainer, Title, LoginBox, InputGroup, Label, InputField, SmallInput, ButtonGroup, Button } from "./AuthStyle";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
+  const getRegister = async () => {
+    try {
+      if (!id || !pw || !fname || !lname || !nickname) {
+        alert('전부 작성');
+        return;
+      }
+      const response = await fetch('http://localhost:8080/rest/registerMember', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: id,
+          pw: pw,
+          fname: fname,
+          lname: lname,
+          nickname: nickname,
+        })
+      });
+      if (response) {
+      const data = await response.json();
+      if (data.result === "success") {
+        alert('회원가입이 완료되었습니다!');
+        navigate('/');
+      }
+      else {
+        alert('회원가입 오류');
+      }}
+      else {
+        console.log('error');
+      }
+    }
+    catch {
+
+    }
+  }
     return (
         <PageContainer>
             <LoginBox>
@@ -12,49 +53,39 @@ const Register = () => {
           {/* ID */}
           <InputGroup>
             <Label htmlFor="id">ID</Label>
-            <InputField id="id" type="text" placeholder="Enter your ID" />
+            <InputField id="id" type="text" placeholder="Enter your ID" 
+                    value={id} onChange={(e) => setId(e.target.value)}/>
           </InputGroup>
 
           {/* PW */}
           <InputGroup>
             <Label htmlFor="pw">PW</Label>
-            <InputField id="pw" type="password" placeholder="Enter your Password" />
+            <InputField id="pw" type="password" placeholder="Enter your Password"
+              value={pw} onChange={(e) => setPw(e.target.value)} />
           </InputGroup>
 
           {/* Name */}
           <InputGroup>
-            <Label htmlFor="name">Name</Label>
-            <InputField id="name" type="text" placeholder="Enter your Name" />
+            <Label htmlFor="fname">First Name</Label>
+            <InputField id="fname" type="text" placeholder="Enter your Name"
+              value={fname} onChange={(e) => setFname(e.target.value)} />
+          </InputGroup>
+
+          <InputGroup>
+            <Label htmlFor="lname">Last Name</Label>
+            <InputField id="lname" type="text" placeholder="Enter your Name"
+              value={lname} onChange={(e) => setLname(e.target.value)} />
           </InputGroup>
 
           {/* Nickname */}
           <InputGroup>
             <Label htmlFor="nickname">Nickname</Label>
-            <InputField id="nickname" type="text" placeholder="Enter your Nickname" />
+            <InputField id="nickname" type="text" placeholder="Enter your Nickname"
+              value={nickname} onChange={(e) => setNickname(e.target.value)} />
           </InputGroup>
-
-          {/* 생년월일 */}
-          <InputGroup>
-            <Label htmlFor="birth">생년월일</Label>
-            <SmallInput id="year" type="text" placeholder="년" />
-            <SmallInput id="month" type="text" placeholder="월" />
-            <SmallInput id="day" type="text" placeholder="일" />
-          </InputGroup>
-
-          {/* Email */}
-          <InputGroup>
-            <Label htmlFor="email">email</Label>
-            <InputField id="email" type="email" placeholder="Enter your Email" />
-          </InputGroup>
-
-          {/* 인증번호 & 전송 버튼 */}
-          <ButtonGroup>
-            <Button type="button">인증번호 받기</Button>
-            <Button type="button">전송</Button>
-          </ButtonGroup>
 
           {/* 회원가입 버튼 */}
-          <Button type="button" style={{ marginTop: "20px", width: "100%" }} onClick={()=>navigate('/')}>
+          <Button type="button" style={{ marginTop: "20px", width: "100%" }} onClick={(e)=>{e.preventDefault(); getRegister();}}>
             회원가입 완료
           </Button>
         </form>
