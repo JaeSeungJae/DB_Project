@@ -19,6 +19,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/rest/**").permitAll() // 특정 경로는 인증 없이 허용
+                        .anyRequest().authenticated()
                 );
         return http.build();
     }
@@ -26,7 +27,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:5173"); // React 개발 서버 Origin 허용
+        configuration.addAllowedOriginPattern("*"); // 모든 Origin 허용
         configuration.addAllowedHeader("*"); // 모든 헤더 허용
         configuration.addAllowedMethod("*"); // 모든 HTTP 메서드 허용
         configuration.setAllowCredentials(true); // 자격 증명 허용

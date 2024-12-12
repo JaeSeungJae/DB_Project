@@ -19,16 +19,18 @@ public class RegisterMemberController {
         member.setFname(request.getFname());
         member.setLname(request.getLname());
         member.setNickname(request.getNickname());
+        member.setBirth_date(request.getBirth_date());
+        member.setEmail(request.getEmail());
 
         String result = memberService.registerMember(member);
         if ("success".equals(result)) {
             return ResponseEntity.ok(new RegisterResponse(result, member));
-        }
-        else {
+        } else {
             return ResponseEntity.badRequest().body(new RegisterResponse(result, null));
         }
     }
 }
+
 
 class RegisterRequest {
     private String id;
@@ -36,6 +38,8 @@ class RegisterRequest {
     private String fname;
     private String lname;
     private String nickname;
+    private String birth_date; // 추가된 필드
+    private String email;      // 추가된 필드
 
     // Getters and Setters
     public String getId() {
@@ -76,6 +80,22 @@ class RegisterRequest {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getBirth_date() { // 추가된 Getter
+        return birth_date;
+    }
+
+    public void setBirth_date(String birth_date) { // 추가된 Setter
+        this.birth_date = birth_date;
+    }
+
+    public String getEmail() { // 추가된 Getter
+        return email;
+    }
+
+    public void setEmail(String email) { // 추가된 Setter
+        this.email = email;
     }
 }
 
