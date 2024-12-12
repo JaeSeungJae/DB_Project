@@ -1,26 +1,18 @@
 package DB_Project_back.DB.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class GlobalCorsConfig {
+public class GlobalCorsConfig implements WebMvcConfigurer {
 
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-
-        config.setAllowCredentials(true); // 자격 증명 허용 (쿠키, 헤더 등)
-        config.addAllowedOriginPattern("*"); // 모든 출처 허용
-        config.addAllowedHeader("*"); // 모든 헤더 허용
-        config.addAllowedMethod("*"); // 모든 HTTP 메서드 허용 (GET, POST 등)
-
-        source.registerCorsConfiguration("/**", config); // 모든 경로에 CORS 설정 적용
-        return new CorsFilter(source);
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // 모든 경로에 대해 CORS 설정
+                .allowedOrigins("http://localhost:5173") // 모든 Origin 허용
+                .allowedMethods("*") // 모든 HTTP 메서드 허용 (GET, POST, PUT, DELETE 등)
+                .allowedHeaders("*") // 모든 헤더 허용
+                .allowCredentials(true); // 자격 증명 허용 (쿠키, 인증 정보 등)
     }
 }
-

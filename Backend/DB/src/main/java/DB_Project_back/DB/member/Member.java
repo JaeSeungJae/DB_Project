@@ -16,12 +16,15 @@ public class Member {
     @Column(nullable = false)
     private String pw;
 
-    private String Fname;
-    private String Lname;
+    private String fname;
+    private String lname;
     private String nickname;
 
     @Transient
-    private String name;
+    private String getName(){
+        return fname + " " + lname;
+    };
+
 
     private int level;
 }

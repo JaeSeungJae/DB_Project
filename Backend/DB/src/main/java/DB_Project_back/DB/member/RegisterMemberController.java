@@ -21,8 +21,12 @@ public class RegisterMemberController {
         member.setNickname(request.getNickname());
 
         String result = memberService.registerMember(member);
-
-        return ResponseEntity.ok(new RegisterResponse(result));
+        if ("success".equals(result)) {
+            return ResponseEntity.ok(new RegisterResponse(result, member));
+        }
+        else {
+            return ResponseEntity.badRequest().body(new RegisterResponse(result, null));
+        }
     }
 }
 
@@ -77,13 +81,16 @@ class RegisterRequest {
 
 class RegisterResponse {
     private String result;
+    private Member member;
 
-    public RegisterResponse(String result) {
+    public RegisterResponse(String result, Member member) {
         this.result = result;
+        this.member = member;
     }
 
     // Getter
     public String getResult() {
         return result;
     }
+    public Member getMember() {return member;}
 }

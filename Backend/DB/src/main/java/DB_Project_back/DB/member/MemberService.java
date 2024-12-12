@@ -22,6 +22,7 @@ public class MemberService {
         }
 
         // 데이터 저장
+        member.setLevel(1);
         memberRepository.save(member);
         return "success";
     }

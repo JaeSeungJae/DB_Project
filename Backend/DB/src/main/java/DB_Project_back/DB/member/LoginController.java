@@ -12,6 +12,8 @@ public class LoginController {
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
+        System.out.println("Received id : " + request.getId());
+        System.out.println("Received pw : " + request.getPw());
         String result = memberService.login(request.getId(), request.getPw());
         return new LoginResponse(result);
     }
