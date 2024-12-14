@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   PageContainer,
@@ -17,33 +17,6 @@ import {
 } from "./MarketStyle";
 import { useNavigate } from "react-router-dom";
 
-const tempProductList = [
-    {
-        product_name: '상품1',
-        product_price: '10000',
-        product_description: '이 상품은 상품1입니다. 이 상품은 상품1입니다. 이 상품은 상품1입니다.',
-        product_image: '상품1 이미지',
-        product_category: '컴퓨터',
-        product_id: 1
-    },
-    {
-        product_name: '상품2',
-        product_price: '20000',
-        product_description: '이 상품은 상품2입니다.',
-        product_image: '상품2 이미지',
-        product_category: '스마트폰',
-        product_id: 2
-    },
-    {
-        product_name: '상품3',
-        product_price: '30000',
-        product_description: '이 상품은 상품3입니다.',
-        product_image: '상품3 이미지',
-        product_category: '키보드',
-        product_id: 3
-    }
-]
-
 const MarketMain = () => {
     const navigate = useNavigate();
 
@@ -60,6 +33,30 @@ const MarketMain = () => {
         return text;
     }
 
+    const getProductList = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/rest/getProductList', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            if (response) {
+                const data = await response.json();
+                console.log(data);
+                setProductList(data.products);
+            }
+          }
+          catch {
+      
+          }
+    }
+
+    useEffect(()=> {
+        getProductList();
+        setFilteredProduct(productList);
+    }, [])
+
     const updateProductList = () => { // 추후 rest/getProductList를 통해 목록을 불러옴
         return (
         <ProductList>
@@ -73,8 +70,7 @@ const MarketMain = () => {
                     <div>{truncateDesc(product.product_description, 30)}</div>
                 </ProductInfo>
                 <ProductStatus>
-                    거래 상태<br />
-                    20XX.XX.XX - XX:XX
+                    {product.status}
                 </ProductStatus>
             </ProductItem>
         ))}
@@ -83,9 +79,10 @@ const MarketMain = () => {
     }
     
     const [search, setSearch] = useState("");
-    const [filteredProduct, setFilteredProduct] = useState(tempProductList);
+    const [filteredProduct, setFilteredProduct] = useState([]);
+    const [productList, setProductList] = useState([]);
     const handleSearch = () => {
-        const filtered = tempProductList.filter((product) => 
+        const filtered = productList.filter((product) => 
             product.product_name.includes(search)
         )
         setFilteredProduct(filtered);
