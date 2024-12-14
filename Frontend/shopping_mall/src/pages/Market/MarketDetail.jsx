@@ -35,7 +35,8 @@ const MarketDetail = () => {
     return (
         <PageContainer>
           {/* 상단 영역 */}
-          <Header>
+          {!productInfo ? (<p>loading...</p>) : (<>
+            <Header>
             <h2>{productInfo.name}</h2>
             <div>
               <button style={{margin: '5px'}}>관심</button>
@@ -49,7 +50,7 @@ const MarketDetail = () => {
           <ProductDetailInfo>
             <p>판매자 : (seller_id)</p>
             <p>상태 : (status)</p>
-            <p>가격 : {`${productInfo.price.toLocaleString('ko-Kr')}원`}</p>
+            <p>가격 : {`${productInfo.price.toLocaleString('ko-KR')}원`}</p>
           </ProductDetailInfo>
     
           {/* 상품 이미지 */}
@@ -70,6 +71,8 @@ const MarketDetail = () => {
             <ActionButton>판매자와 채팅하기</ActionButton>
             <ActionButton>판매자 리뷰 보기</ActionButton>
           </ButtonContainer>
+          </>)}
+          
         </PageContainer>
     );
 }
