@@ -12,7 +12,7 @@ const Register = () => {
   const getRegister = async () => {
     try {
       if (!id || !pw || !fname || !lname || !nickname) {
-        alert('전부 작성');
+        alert('전부 작성해주세요');
         return;
       }
       const response = await fetch('http://localhost:8080/rest/registerMember', {
