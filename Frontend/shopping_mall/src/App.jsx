@@ -25,7 +25,6 @@ import BoardManage from "./pages/Manager/BoardMange";
 import MarketManage from "./pages/Manager/MarketManage";
 import UserManage from "./pages/Manager/UserManage";
 import ReportManage from "./pages/Manager/ReportManage";
-import SettingManage from "./pages/Manager/SettingManage";
 import UserInfo from "./pages/Manager/UserInfo";
 
 function App() {
@@ -58,7 +57,6 @@ function App() {
           <Route path="/market-manage" element={<MarketManage />} /> 
           <Route path="/user-manage" element={<UserManage />} /> 
           <Route path="/report-manage" element={<ReportManage />} /> 
-          <Route path="/setting-manage" element={<SettingManage />} /> 
           <Route path="/userinfo/:id" element={<UserInfo />} /> 
         </Routes>
         <Footer />

@@ -29,9 +29,7 @@ const ManagerMain = () => {
         <StyledButton onClick={() => navigate("/report-manage")}>
           신고 내역 관리
         </StyledButton>
-        <StyledButton onClick={() => navigate("/setting-manage")}>
-          관리자 설정
-        </StyledButton>
+      
       </ButtonContainer>
       <Footer />
     </PageContainer>
