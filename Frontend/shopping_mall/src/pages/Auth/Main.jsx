@@ -6,7 +6,7 @@ const Main = () => {
     const navigate = useNavigate();
     
     useEffect(()=> {
-        if (localStorage.getItem('id') !== '1') {
+        if (!localStorage.getItem('id')) {
             navigate('/login');
         }
     }, []);

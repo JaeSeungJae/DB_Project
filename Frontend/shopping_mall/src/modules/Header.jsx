@@ -11,8 +11,7 @@ const Header = () => {
   }
   return (
     <HeaderContainer>
-      {Number(localStorage.getItem('id')) ? <Button style={{margin: '40px'}} onClick={logout}>로그아웃</Button> 
-      : <Button style={{margin: '40px'}} onClick={()=>{navigate('/login')}}>로그인</Button>}
+      <Button style={{margin: '40px'}} onClick={logout}>{localStorage.getItem("id") === "0" ? "로그인" : "로그아웃"}</Button> 
     </HeaderContainer>
   );
 };

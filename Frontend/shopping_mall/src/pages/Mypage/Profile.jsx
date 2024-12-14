@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { PageContainer, Header } from "../Market/MarketStyle";
 import { Button } from "./MyPageStyle";
@@ -6,16 +6,42 @@ import { InputsContainer, TextInput } from "./MyPageStyle";
 import { Container } from "./MyPageStyle";
 
 const Profile = () => {
-    const [email, setEmail] = useState(''); // 이메일
+    const [mileage, setMileage] = useState(0); // 마일리지
+    const [amount, setAmount] = useState(0)
     const [password, setPassword] = useState(''); // 비밀번호
     const [verifyPwd, setVerifyPwd] = useState(''); // 비밀번호 확인
     const [username, setName] = useState(''); // id
     const [nickname, setNickname] = useState(''); // 닉네임
     const passwordCheck = password === verifyPwd; // 비밀번호 확인 시 체크하는 변수 (boolean)
     const [pwVb, setPwVb] = useState(false); // 비밀번호 암호화
-    const handleSubmit = () => {
-        // api로 업데이트하기
+
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/rest/getProfile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: localStorage.getItem('id') 
+                })
+            });
+            if (response) {
+                const data = await response.json();
+                console.log(data);
+                setName(data.data.id);
+                setNickname(data.data.nickname);
+                setMileage(data.data.mileage);
+                setAmount(data.data.amount);
+            }
+        }
+        catch {
+
+        }
     }
+    useEffect(()=> {
+        handleSubmit();
+    }, [])
     return (
         <PageContainer>
             <Header>
@@ -61,11 +87,22 @@ const Profile = () => {
                 />
                 <TextInput 
                     height={60}
-                    value={email}
+                    value={amount}
+                    disabled
                     onChange={(event) => {  // 여기를 camelCase로 변경
-                        setEmail(event.target.value);
+                        setAmount(event.target.value);
                     }}
-                    placeHolder={email ? email : "이메일"}  // 여기를 소문자로 변경
+                    placeHolder={amount ? amount : "잔액"}  // 여기를 소문자로 변경
+                    // icon="email"
+                />
+                <TextInput 
+                    height={60}
+                    value={mileage}
+                    disabled
+                    onChange={(event) => {  // 여기를 camelCase로 변경
+                        setMileage(event.target.value);
+                    }}
+                    placeHolder={mileage ? mileage : "마일리지 금액"}  // 여기를 소문자로 변경
                     // icon="email"
                 />
                 </InputsContainer>

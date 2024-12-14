@@ -24,7 +24,7 @@ const Login = () => {
             });
             const data = await response.json();
             if (data.result === "success") {
-                localStorage.setItem('id', 1);
+                localStorage.setItem('id', id);
                 navigate('/');
             }
             else {
