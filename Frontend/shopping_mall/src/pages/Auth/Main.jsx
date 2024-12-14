@@ -17,6 +17,7 @@ const Main = () => {
                 <ColumnFlexBox>
                 <Button style={{ margin: "40px", height: "100px" }} onClick={() => navigate("/board")}>자유게시판</Button>
                 <Button style={{margin: '40px', height: '100px'}} onClick={()=>navigate('/market')}>마켓</Button>
+                <Button style={{ margin: "40px", height: "100px" }} onClick={() => navigate("/manager")}>관리자</Button>
                 </ColumnFlexBox>
             </LoginBox>
         </PageContainer>

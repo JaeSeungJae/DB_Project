@@ -20,9 +20,13 @@ import BoardMain from './pages/Board/BoardMain';
 import Article from "./pages/Board/Article";
 import Post from "./pages/Board/Post";
 import Report from "./pages/Board/Report";
-
-
-
+import Manager from "./pages/Manager/ManagerMain";
+import BoardManage from "./pages/Manager/BoardMange";
+import MarketManage from "./pages/Manager/MarketManage";
+import UserManage from "./pages/Manager/UserManage";
+import ReportManage from "./pages/Manager/ReportManage";
+import SettingManage from "./pages/Manager/SettingManage";
+import UserInfo from "./pages/Manager/UserInfo";
 
 function App() {
 
@@ -49,6 +53,13 @@ function App() {
           <Route path="/article/:id" element={<Article />} />
           <Route path="/post" element={<Post />} />  
           <Route path="/report" element={<Report />} /> 
+          <Route path="/manager" element={<Manager />} /> 
+          <Route path="/board-manage" element={<BoardManage />} /> 
+          <Route path="/market-manage" element={<MarketManage />} /> 
+          <Route path="/user-manage" element={<UserManage />} /> 
+          <Route path="/report-manage" element={<ReportManage />} /> 
+          <Route path="/setting-manage" element={<SettingManage />} /> 
+          <Route path="/userinfo/:id" element={<UserInfo />} /> 
         </Routes>
         <Footer />
       </BrowserRouter>
