@@ -4,6 +4,7 @@ import { PageContainer, Header } from "../Market/MarketStyle";
 import { Button } from "./MyPageStyle";
 import { InputsContainer, TextInput } from "./MyPageStyle";
 import { Container } from "./MyPageStyle";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const [mileage, setMileage] = useState(0); // 마일리지
@@ -14,8 +15,9 @@ const Profile = () => {
     const [nickname, setNickname] = useState(''); // 닉네임
     const passwordCheck = password === verifyPwd; // 비밀번호 확인 시 체크하는 변수 (boolean)
     const [pwVb, setPwVb] = useState(false); // 비밀번호 암호화
+    const navigate = useNavigate();
 
-    const handleSubmit = async () => {
+    const getProfile = async () => {
         try {
             const response = await fetch('http://localhost:8080/rest/getProfile', {
                 method: 'POST',
@@ -39,8 +41,49 @@ const Profile = () => {
 
         }
     }
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/rest/modifyProfile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: localStorage.getItem('id'),
+                    pw: password,
+                    nickname: nickname                    
+                })
+            });
+            if (response) {
+                const data = await response.json();
+                console.log(data);
+                alert('정보 변경 완료!');
+                navigate('/mypage');
+            }
+        }
+        catch {
+
+        }
+    }
+    const chargeMoney = async () => {
+        const response = await fetch('http://localhost:8080/rest/chargeAccount', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: localStorage.getItem('id'),
+                amount: amount
+            })
+        });
+        if (response) {
+            const data = await response.json();
+            console.log(data);
+            alert('충전 완료!');
+        }
+    }
     useEffect(()=> {
-        handleSubmit();
+        getProfile();
     }, [])
     return (
         <PageContainer>
@@ -85,27 +128,23 @@ const Profile = () => {
                     placeHolder={nickname ? nickname : "닉네임"}  // 여기를 소문자로 변경
                     // icon="phone"
                 />
+            </InputsContainer>
+            <InputsContainer>
                 <TextInput 
                     height={60}
-                    value={amount}
+                    value={`잔액 : ${amount}원`}
                     disabled
-                    onChange={(event) => {  // 여기를 camelCase로 변경
-                        setAmount(event.target.value);
-                    }}
                     placeHolder={amount ? amount : "잔액"}  // 여기를 소문자로 변경
                     // icon="email"
                 />
                 <TextInput 
                     height={60}
-                    value={mileage}
+                    value={`마일리지 : ${mileage}원`}
                     disabled
-                    onChange={(event) => {  // 여기를 camelCase로 변경
-                        setMileage(event.target.value);
-                    }}
                     placeHolder={mileage ? mileage : "마일리지 금액"}  // 여기를 소문자로 변경
                     // icon="email"
                 />
-                </InputsContainer>
+            </InputsContainer>
                 {!passwordCheck && (
                     <p style={{textAlign: 'center', color:'red'}}>비밀번호가 일치하지 않습니다.</p>
                 )}
@@ -124,12 +163,12 @@ const Profile = () => {
                     style={{width: '250px', height: '50px'}}
                     onClick={handleSubmit}>수정하기</Button>
                 <div style={{display: 'flex', flexDirection: 'row'}}>
-                    <p style={{margin: '10px'}}>마일리지 충전</p>
-                    <input type="number" />
+                    <p style={{margin: '10px'}}>금액 충전</p>
+                    <input type="number" onChange={(e) => setAmount(e.target.value)}/>
                 </div>
                 <Button
                     style={{width: '250px', height: '50px',marginTop: '50px', marginBottom: '200px', }}
-                    onClick={handleSubmit}>충전하기</Button>
+                    onClick={chargeMoney}>충전하기</Button>
         </PageContainer>
     )
 }
