@@ -1,8 +1,12 @@
-package DB_Project_back.DB.member;
+package com.example.demo.member;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import com.example.demo.chat.Chat;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 
 @Service
@@ -27,10 +31,9 @@ public class MemberService {
             return "failed: duplicate id";
         }
 
-        String sql = "INSERT INTO member (id, pw, fname, lname, nickname, birth_date, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, member.getId(), member.getPw(), member.getFname(), 
-                            member.getLname(), member.getNickname(), member.getBirth_date(), 
-                            member.getEmail(), 1, 0);
+        String sql = "INSERT INTO member (id, pw, fname, lname, nickname) VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, member.getId(), member.getPw(), member.getFname(),
+                member.getLname(), member.getNickname());
         return "success";
     }
 
@@ -67,8 +70,6 @@ public class MemberService {
                 member.setFname(rs.getString("fname"));
                 member.setLname(rs.getString("lname"));
                 member.setNickname(rs.getString("nickname"));
-                member.setBirth_date(rs.getString("birth_date"));
-                member.setEmail(rs.getString("email"));
                 member.setLevel(rs.getInt("level"));
                 member.setAmount(rs.getInt("amount"));
                 return member;
@@ -77,6 +78,63 @@ public class MemberService {
             return null;
         }
     }
-    
+
+    // 채팅방 정보 조회 메서드
+    public Chat[] getChatMessagesByRoomId(int roomId) {
+        String sql = "SELECT message_id, room_id, sender_id, message, sent_at FROM chat_message WHERE room_id = ? ORDER BY sent_at ASC";
+
+        List<Chat> messages = jdbcTemplate.query(sql, new Object[]{roomId}, (rs, rowNum) -> {
+            Chat chat = new Chat();
+            chat.setMessageId(rs.getInt("message_id"));
+            chat.setRoomId(rs.getInt("room_id"));
+            chat.setSenderId(rs.getInt("sender_id"));
+            chat.setMessage(rs.getString("message"));
+            chat.setSentAt(rs.getTimestamp("sent_at").toString());
+            return chat;
+        });
+
+        return messages.toArray(new Chat[0]);
+    }
+
+    // 채팅 전송 메서드
+    public String sendChatMessage(int chatId, int senderId, String chatContent) {
+        String sql = "INSERT INTO chat_message (room_id, sender_id, message, sent_at) " +
+                "VALUES (?, ?, ?, NOW())";
+
+        try {
+            int rows = jdbcTemplate.update(sql, chatId, senderId, chatContent);
+
+            if (rows > 0) {
+                return "success";
+            } else {
+                return "failed";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "failed";
+        }
+    }
+
+    // 마일리지, 잔액 조회 메서드
+    public Member getUserAmountAndMileage(String userId) {
+        String sql = "SELECT amount, mileage FROM member WHERE id = ?";
+
+        try {
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    new Object[]{userId},
+                    (rs, rowNum) -> {
+                        Member member = new Member();
+                        member.setAmount(rs.getInt("amount"));
+                        member.setMileage(rs.getInt("mileage"));
+                        return member;
+                    }
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null; // 데이터가 없거나 에러 발생 시
+        }
+    }
+
     // ** 메서드 추가 구련 할 때, 인자 직접 전달하는 방식으로해야 경고 안뜨더라 ..! **
 }

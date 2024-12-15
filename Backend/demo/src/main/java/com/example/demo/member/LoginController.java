@@ -1,4 +1,4 @@
-package DB_Project_back.DB.member;
+package com.example.demo.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package DB_Project_back.DB.member;
+package com.example.demo.member;
 
 public class Member {
     private int uid;
@@ -11,6 +11,7 @@ public class Member {
     private String email;
     private int level;
     private int amount;
+    private int mileage;
 
     // Getter 메서드들
     public int getUid() { return uid; }
@@ -23,7 +24,8 @@ public class Member {
     public String getEmail() { return email; }
     public int getLevel() { return level; }
     public int getAmount() { return amount; }
-    
+    public int getMileage() { return mileage; }
+
     // Setter 메서스들
     public void setUid(int uid) { this.uid = uid; }
     public void setId(String id) { this.id = id; }
@@ -35,5 +37,6 @@ public class Member {
     public void setEmail(String email) { this.email = email; }
     public void setLevel(int level) { this.level = level; }
     public void setAmount(int amount) { this.amount = amount; }
-    
+    public void setMileage(int mileage) { this.mileage = mileage; }
+
 }
