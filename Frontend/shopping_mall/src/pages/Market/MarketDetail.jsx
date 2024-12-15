@@ -23,6 +23,29 @@ const MarketDetail = () => {
     getProductInfo();
   }, []);
 
+  const removeProduct = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/rest/removeProduct", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          product_id: id,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        alert("삭제가 완료되었습니다.");
+        navigate('/market');
+      } else {
+        console.error("Failed to remove product");
+      }
+    } catch (error) {
+      console.error("Error removing product:", error.message);
+    }
+  }
+
   const modifyProduct = async () => {
     try {
       const response = await fetch("http://localhost:8080/rest/modifyProduct", {
@@ -93,7 +116,8 @@ const MarketDetail = () => {
                   >
                     {isEditMode ? "수정 취소" : "수정"}
                   </button>
-                  <button style={{ margin: "5px" }}>삭제</button>
+                  <button style={{ margin: "5px" }}
+                  onClick={removeProduct}>삭제</button>
                 </>
               )}
               <button style={{ margin: "5px" }}>신고</button>
