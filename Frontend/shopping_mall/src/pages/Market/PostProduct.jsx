@@ -19,31 +19,36 @@ const PostProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // 폼 제출 시 페이지 새로고침 방지
-
-    // FormData 객체 생성 (이미지 파일 포함 전송)
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("category", category);
-    formData.append("description", description);
-    formData.append("image", image);
-
+  
     try {
+      // JSON 객체 생성
+      const productData = {
+        product_name: name,
+        product_price: price,
+        product_category: category,
+        product_description: description,
+        seller_id: localStorage.getItem('id'), // 현재 로그인된 사용자 ID (임시)
+        seller_name: "John Doe", // 판매자 이름 (임시)
+      };
+  
       // API 호출 (POST 요청)
-      const response = await fetch("/api/products", {
+      const response = await fetch("http://localhost:8080/rest/uploadProduct", {
         method: "POST",
-        body: formData, // FormData를 직접 전달
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData), // JSON 데이터를 전송
       });
-
+  
       if (!response.ok) {
         throw new Error("판매글 등록 실패");
       }
-
+  
       const data = await response.json();
       alert("판매글이 등록되었습니다!");
-      console.log(data);
+      console.log("응답 데이터:", data);
     } catch (error) {
-      console.error(error);
+      console.error("오류 발생:", error.message);
       alert("판매글 등록 중 오류가 발생했습니다.");
     }
   };
@@ -137,6 +142,7 @@ const PostProduct = () => {
         {/* 제출 버튼 */}
         <Button
           type="submit"
+          onClick={handleSubmit}
         >
           등록하기
         </Button>
