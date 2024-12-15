@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PageContainer,
   FilterContainer,
@@ -29,11 +29,7 @@ const BoardMain = () => {
   };
 
   // 게시글 데이터
-  const [boardItems, setBoardItems] = useState([
-    { id: 1, title: "게시글 1", nickname: "유저1", date: "2024-12-04T12:30:00Z", content: "내용 미리보기 ..", likes: 3 },
-    { id: 2, title: "게시글 2", nickname: "유저2", date: "2024-12-03T09:15:00Z", content: "내용 미리보기 ..", likes: 5 },
-    { id: 3, title: "게시글 3", nickname: "유저3", date: "2024-12-02T18:45:00Z", content: "내용 미리보기 ..", likes: 1 },
-  ]);
+  const [boardItems, setBoardItems] = useState([]);
 
   const handleRowClick = (id) => {
     navigate(`/article/${id}`);
@@ -42,6 +38,29 @@ const BoardMain = () => {
   const handleAddPost = () => {
     navigate("/post");
   };
+
+  const getBoard = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/rest/getBoard', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response) {
+          const data = await response.json();
+          console.log(data);
+          setBoardItems(data);
+      }
+    }
+    catch {
+
+    }
+  }
+
+  useEffect(()=> {
+    getBoard();
+  }, [])
 
   return (
     <PageContainer>
@@ -68,8 +87,8 @@ const BoardMain = () => {
               onClick={() => handleRowClick(item.id)}
               style={{ cursor: "pointer" }}
             >
-              <TableCell>{formatDateTime(item.date)}</TableCell>
-              <TableCell>{item.nickname}</TableCell>
+              <TableCell>{formatDateTime('2024-12-11T00:00:00')}</TableCell>
+              <TableCell>관리자</TableCell>
               <TableCell>{item.title}</TableCell>
               <TableCell>{item.content.slice(0, 20)}...</TableCell>
               <TableCell>{item.likes}</TableCell>

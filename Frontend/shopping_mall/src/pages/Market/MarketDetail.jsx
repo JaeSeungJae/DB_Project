@@ -19,25 +19,26 @@ const MarketDetail = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            uid: id
+            product_id: Number(id) // 서버가 'uid'로 요청을 처리하도록 수정
           })
         });
-        if (response) {
+        if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setProductInfo(data.data);
+          setProductInfo(data); // 수정: 서버가 ProductResponse를 바로 반환하므로 data 사용
+        } else {
+          console.error('Error fetching product info');
         }
+      } catch (error) {
+        console.error('Failed to fetch product info:', error.message);
       }
-      catch {
-
-      }
-    }
+    };
     return (
         <PageContainer>
           {/* 상단 영역 */}
           {!productInfo ? (<p>loading...</p>) : (<>
             <Header>
-            <h2>{productInfo.name}</h2>
+            <h2>{productInfo.product_name}</h2>
             <div>
               <button style={{margin: '5px'}}>관심</button>
               <button style={{margin: '5px'}}>수정</button>
@@ -48,16 +49,14 @@ const MarketDetail = () => {
     
           {/* 상품 정보 */}
           <ProductDetailInfo>
-            <p>판매자 : (seller_id)</p>
-            <p>상태 : (status)</p>
-            <p>가격 : {`${productInfo.price.toLocaleString('ko-KR')}원`}</p>
+            <p>판매자 : {productInfo.seller_name}</p>
+            <p>상태 : 판매중</p>
+            <p>가격 : {`${productInfo.product_price.toLocaleString('ko-KR')}원`}</p>
           </ProductDetailInfo>
     
           {/* 상품 이미지 */}
           <ImagesContainer>
-            <ImageBox>Image</ImageBox>
-            <ImageBox>Image</ImageBox>
-            <ImageBox>Image</ImageBox>
+            <ImageBox>{productInfo.product_image}</ImageBox>
           </ImagesContainer>
     
           {/* 상품 설명 */}
@@ -66,8 +65,8 @@ const MarketDetail = () => {
           </ProductInfo>
     
           {/* 버튼 */}
-          <ButtonContainer>
-            <ActionButton onClick={()=>navigate(`/market/${id}/buy`)}>즉시 구매</ActionButton>
+          <ButtonContainer style={{marginBottom:'200px'}}>
+            <ActionButton onClick={()=>navigate(`/market/${id}/buy`, {state: {productInfo}})}>즉시 구매</ActionButton>
             <ActionButton>판매자와 채팅하기</ActionButton>
             <ActionButton>판매자 리뷰 보기</ActionButton>
           </ButtonContainer>

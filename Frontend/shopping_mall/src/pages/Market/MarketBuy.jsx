@@ -1,17 +1,21 @@
-import React, { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { PageContainer, Header, ImagesContainer, ImageBox,
     ProductDetailInfo
  } from "./MarketStyle";
  import { InputContainer } from "./MarketStyle";
 
 const MarketBuy = () => {
+    const navigate = useNavigate();
+    const {state} = useLocation();
+    const productInfo = state?.productInfo || {};
     const {id} = useParams();
     const [account, setAccount] = useState(0);
-    const [mileage, setMileage] = useState(1000);
+    const [mileage, setMileage] = useState(0);
     const [useMileage, setUseMileage] = useState(0);
-    const [ProductCost, setProductCost] = useState(10000);
-    const calculate = () => {
+    const [ProductCost, setProductCost] = useState(0);
+    const [shippingAddress, setShippingAddress] = useState('');
+    const calculate = async() => {
         if (mileage < useMileage) {
             alert('마일리지 금액을 초과했습니다.');
         }
@@ -21,7 +25,54 @@ const MarketBuy = () => {
         else {
             alert('구매 완료했습니다.');
         }
+        const response = await fetch('http://localhost:8080/rest/purchaseProduct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                buyerId: localStorage.getItem('id'), // 구매자 ID (예시)
+                sellerId: productInfo.seller_id, // 판매자 ID
+                productUid: id, // 상품 UID
+                transactionAmount: productInfo.product_price, // 거래 금액
+                usedMileage: useMileage, // 사용한 마일리지
+                shippingAddress: shippingAddress // 배송 주소 (예시)
+            })
+        });
+        if (response) {
+            const data = await response.json();
+            console.log(data);
+            navigate('/market');
+        }
     }
+    const getAmount = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/rest/getAmountAndMileage`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                userId: localStorage.getItem('id') // 서버가 'uid'로 요청을 처리하도록 수정
+              })
+            });
+            if (response.ok) {
+              const data = await response.json();
+              console.log(data);
+              setAccount(data.amount);
+              setMileage(data.mileage);
+               // 수정: 서버가 ProductResponse를 바로 반환하므로 data 사용
+            } else {
+              console.error('Error fetching product info');
+            }
+          } catch (error) {
+            console.error('Failed to fetch product info:', error.message);
+          }
+    }
+    useEffect(()=> {
+        getAmount();
+        setProductCost(productInfo.product_price);
+    },[])
     return (
         <PageContainer>
           {/* 상단 영역 */}
@@ -32,14 +83,12 @@ const MarketBuy = () => {
           {/* 상품 정보 */}
           <ProductDetailInfo style={{alignItems:'center'}}>
             <ImagesContainer>
-                <ImageBox>Image</ImageBox>
-                <ImageBox>Image</ImageBox>
-                <ImageBox>Image</ImageBox>
+                <ImageBox>{productInfo.product_image}</ImageBox>
             </ImagesContainer>
-            <p>상품 이름 : (product_name)</p>
-            <p>판매자 : (seller_id)</p>
-            <p>상태 : (status)</p>
-            <p>가격 : (product_price)</p>
+            <p>상품 이름 : {productInfo.product_name}</p>
+            <p>판매자 : {productInfo.seller_id}</p>
+            <p>상태 : 판매중</p>
+            <p>가격 : {productInfo.product_price}</p>
           </ProductDetailInfo>
           {/* 상품 설명 */}
           <ProductDetailInfo style={{justifyContent: 'center', flexDirection: 'column'}}>
@@ -48,23 +97,11 @@ const MarketBuy = () => {
                 <input
                     type="text"
                     id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={shippingAddress}
+                    onChange={(e) => setShippingAddress(e.target.value)}
                     placeholder="배송지를 입력해주세요"
                     required
                     style={{ width: "80%", padding: "8px", marginTop: "5px", margin: '20px' }}
-                />
-            </InputContainer>
-            <InputContainer>
-                <p>상세주소</p>
-                <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setAccount(e.target.value)}
-                    placeholder="주소를 입력해주세요"
-                    required
-                    style={{ width: "80%", padding: "8px", marginTop: "5px", margin: '20px'}}
                 />
             </InputContainer>
           </ProductDetailInfo>
