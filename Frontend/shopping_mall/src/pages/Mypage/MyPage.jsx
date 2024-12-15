@@ -12,7 +12,7 @@ const MyPage = () => {
     const [pw, setPW] = useState("pw");
     const [pwCheck, setPwCheck] = useState("pw");
     useEffect(() => {
-        if (Number(localStorage.getItem('id')) !== 1) {
+        if ((localStorage.getItem('id')) === 0) {
             navigate('/login');
         }
     }, []);
@@ -29,16 +29,6 @@ const MyPage = () => {
                 <h2>마이페이지</h2>
             </Header>
             <MyPageBox> 
-                {/* <p>아이디 : {id}</p>
-                {modifyInfo === false ? (<p>닉네임 : {nickname}</p>)
-                : <p>닉네임 <input type="text" value={nickname} onChange={(e)=>setNickname(e.target.value)} /></p>}
-                {modifyInfo === false ? (<p>비밀번호 : ********</p>)
-                : <p>비밀번호 <input type="password" value={pw} onChange={(e)=>setPW(e.target.value)}/></p>}
-                {modifyInfo === true && <p>비밀번호 확인 <input type="password" value={pwCheck} onChange={(e)=>setPwCheck(e.target.value)}/></p>}
-                {modifyInfo ? 
-                <SideButton onClick={()=>checkPW()}>수정 완료</SideButton>
-                :<SideButton onClick={()=>setModifyInfo(true)}>수정</SideButton>} */}
-
                 <MyPageContainer>
                     <Button onClick={()=>navigate('/mypage/favorite')}>관심 목록</Button>
                     <Button onClick={()=>navigate('/mypage/sell')}>판매 내역</Button>

@@ -6,6 +6,8 @@ export const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  max-height: 100vh; /* 화면 크기를 초과하지 않도록 설정 */
+  overflow-y: auto; /* 세로 스크롤 가능 */
   background-color: #d9e9d9; /* 연한 초록색 배경 */
   padding: 20px;
 `;
@@ -184,13 +186,12 @@ export const ProductDescription = styled.div`
 // 버튼 컨테이너
 export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap; /* 버튼이 박스를 넘어가면 줄 바꿈 */
   width: 100%;
   max-width: 800px;
-  margin-bottom: 140px;
+  margin-top: 10px;
 `;
-
 // 큰 버튼
 export const LargeButton = styled.button`
   background-color: #dcdcdc;
@@ -220,7 +221,6 @@ export const ActionButton = styled.button`
     background-color: #dcdcdc;
   }
 `;
-
 export const ProductDetailInfo = styled.div`
   display: flex;
   flex-direction: row;
